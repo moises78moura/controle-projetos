@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<ui:composition template="/WEB-INF/template/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">Alocação de Colaboradores</ui:define>
+
+	<ui:define name="corpo">
+		<h1>Alocação de Colaboradores</h1>
+
+		<h:form id="frmCadastro">
+			<p:messages id="messages" autoUpdate="true" closable="true" />
+			
+			<p:panelGrid columns="2" id="painel" style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo">
+				
+				<p:outputLabel value="Projeto" for="projeto" />
+				
+				<p:selectOneMenu id="projeto" value="#{alocacaoBean.alocacao.projeto}" converter="projetoConverter"
+						 required="true" requiredMessage="Campo Projeto obrigatorio">
+					<f:selectItem itemLabel="Selecione um Projeto"/>
+					<f:selectItems value="#{alocacaoBean.listaProjetos}" var="projeto" 
+						itemLabel="#{projeto.nome}" itemValue="#{projeto}"/>
+				</p:selectOneMenu>
+				
+				<p:outputLabel value="Colaborador" for="colaborador" />
+				
+				<h:panelGroup>
+					<p:inputText id="colaborador" value="#{alocacaoBean.nomeColaborador}"  required="true" requiredMessage="Campo Colaborador obrigatorio"
+						readonly="#{facesContext.currentPhaseId.name eq 'RENDER_RESPONSE'}" />
+					
+					<p:commandButton icon="ui-icon-search" title="Pesquisa"
+						action="#{pesquisaColaboradorDialogBean.configurarComponentePesquisa}"
+						process="@this" update="@none">
+						
+						<p:ajax event="dialogReturn" listener="#{alocacaoBean.colaboradorSelecionadoEvento}"
+							process="@this" update="colaborador" />
+						<p:resetInput target="colaborador" />
+						
+					</p:commandButton>
+					
+				</h:panelGroup>
+				
+			</p:panelGrid>
+			
+			<p:toolbar style="margin-top: 20px">
+				<f:facet name="left">
+					<p:commandButton value="Realiza Alocação" action="#{alocacaoBean.salvar}" update="@form" />
+				</f:facet>
+			</p:toolbar>
+		</h:form>
+	</ui:define>
+</ui:composition>

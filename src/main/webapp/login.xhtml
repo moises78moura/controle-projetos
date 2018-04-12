@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+	<h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title><ui:insert name="titulo">Controle Projeto</ui:insert></title>
+        <h:outputStylesheet library="css" name="sistema.css" />
+	</h:head>
+	
+	<h:body>
+	
+		<h:form id="formLogin">
+		  <p:panel header="Faça o Login para Entrar no Sistema"
+		    style="width: 400px; margin: auto;">
+				<p:messages id="messages" autoUpdate="true" closable="true" />
+				
+				<h:panelGrid columns="2" styleClass="grid-login">
+				
+					<p:outputLabel value="Usuário" for="usuario" />
+					<p:inputText id="usuario" size="25" value="#{loginBean.usuario}" required="true" requiredMessage="Campo Usuario obrigatorio"/>
+					
+					<p:outputLabel value="Senha" for="senha" />
+					<p:password id="senha" size="25" value="#{loginBean.senha}" required="true" requiredMessage="Campo Senha obrigatorio"/>
+					
+					<p:outputLabel/>
+					<p:commandButton value="Efetuar Login" action="#{loginBean.login}" />
+					
+				</h:panelGrid>
+			</p:panel>
+		</h:form>
+	</h:body>
+</html>

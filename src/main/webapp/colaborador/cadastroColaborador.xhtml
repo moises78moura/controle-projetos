@@ -1,0 +1,96 @@
+<ui:composition template="/WEB-INF/template/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+
+	<ui:define name="titulo">Cadastro de Colaborador</ui:define>
+
+	<ui:define name="corpo">
+		<h1>Cadastro de Colaborador</h1>
+
+		<h:form id="frmCadastro">
+			<p:messages id="messages" autoUpdate="true" closable="true" />
+
+			<p:panelGrid columns="2" id="painel"
+				style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo">
+				<p:outputLabel value="Nome" for="nome" />
+				<p:inputText id="nome" value="#{colaboradorBean.colaborador.nome}"
+					required="true" requiredMessage="Campo Nome obrigatorio" />
+
+				<p:outputLabel value="Sexo" for="sexo" />
+				<p:selectOneRadio id="sexo"
+					value="#{colaboradorBean.colaborador.sexo}" required="true"
+					requiredMessage="Campo Sexo obrigatorio">
+					<f:selectItems value="#{colaboradorBean.sexos}" var="_sexo"
+						itemLabel="#{_sexo.descricao}" itemValue="#{_sexo}" />
+				</p:selectOneRadio>
+
+				<p:outputLabel value="Data de Nascimento" for="dataNascimento" />
+				<p:calendar id="dataNascimento"
+					value="#{colaboradorBean.colaborador.nascimento}"
+					pattern="dd/MM/yyyy" mask="true" required="true"
+					requiredMessage="Campo Data de Nascimento obrigatorio" />
+
+				<p:outputLabel value="Remuneracao" for="remuneracao" />
+				<p:inputText id="remuneracao"
+					value="#{colaboradorBean.colaborador.remuneracao}" required="true"
+					requiredMessage="Campo Remuneracao obrigatorio" />
+
+				<p:outputLabel value="E-mail" for="email" />
+				<p:inputText id="email" value="#{colaboradorBean.colaborador.email}" />
+
+				<p:outputLabel value="Departamento" for="departamento" />
+				<p:selectOneMenu id="departamento"
+					value="#{colaboradorBean.colaborador.departamento}"
+					converter="br.com.controle.mb.converter.EntityConverter"
+					required="true" requiredMessage="Campo Departamento obrigatorio">
+					<f:selectItem itemLabel="Selecione um Departamento" />
+					<f:selectItems value="#{colaboradorBean.departamentos}"
+						var="departamento" itemLabel="#{departamento.nome}"
+						itemValue="#{departamento}" />
+				</p:selectOneMenu>
+
+				<p:outputLabel value="Estado" for="estado" />
+				<p:selectOneMenu id="estado" value="#{colaboradorBean.estado}"
+					converter="br.com.controle.mb.converter.EntityConverter"
+					required="true" requiredMessage="Campo Estado obrigatorio">
+					<f:selectItem itemLabel="Selecione um Estado" />
+					<f:selectItems value="#{colaboradorBean.estados}" var="estado"
+						itemLabel="#{estado.nome}" itemValue="#{estado}" />
+					<p:ajax listener="#{colaboradorBean.carregarCidades}"
+						update="cidade" />
+				</p:selectOneMenu>
+
+
+				<p:outputLabel value="Cidade" for="cidade" />
+				<p:selectOneMenu id="cidade" value="#{colaboradorBean.cidade}"
+					converter="br.com.controle.mb.converter.EntityConverter"
+					required="true" requiredMessage="Campo Cidade obrigatorio">
+					<f:selectItem itemLabel="Selecione uma Cidade" />
+					<f:selectItems value="#{colaboradorBean.cidades}" var="cidade"
+						itemLabel="#{cidade.nome}" itemValue="#{cidade}" />
+						<p:ajax listener="#{colaboradorBean.carregarBairros}"
+						update="bairro" />
+				</p:selectOneMenu>
+
+				<p:outputLabel value="Bairro" for="bairro" />
+				<p:selectOneMenu id="bairro" value="#{colaboradorBean.bairro}"
+					converter="br.com.controle.mb.converter.EntityConverter"
+					required="true" requiredMessage="Campo Bairro obrigatorio">
+					<f:selectItem itemLabel="Selecione um Bairro" />
+					<f:selectItems value="#{colaboradorBean.bairros}" var="bairro"
+						itemLabel="#{bairro.nome}" itemValue="#{bairro}" />
+				</p:selectOneMenu>
+			</p:panelGrid>
+
+			<p:toolbar style="margin-top: 20px">
+				<f:facet name="left">
+					<p:commandButton value="Salvar" action="#{colaboradorBean.salvar}"
+						update="@form" />
+				</f:facet>
+			</p:toolbar>
+		</h:form>
+	</ui:define>
+</ui:composition>

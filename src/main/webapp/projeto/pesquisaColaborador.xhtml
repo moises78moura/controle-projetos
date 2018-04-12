@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+	<h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Pesquisa de Colaboradores</title>
+        <h:outputStylesheet library="css" name="sistema.css" />
+	</h:head>
+	
+	<h:body>
+		<h:form>
+			<div style="margin-top: 5px; margin-bottom: 20px">
+	    		<p:inputText id="nome" size="40" value="#{pesquisaColaboradorDialogBean.nome}" />
+	    		
+	    		<p:spacer width="10px"/>
+	    		
+	    		<p:commandButton value="Pesquisar" action="#{pesquisaColaboradorDialogBean.pesquisar}" update="@form" />
+	    	</div>
+	    	
+			<p:dataTable value="#{pesquisaColaboradorDialogBean.listaColaboradores}" var="colaborador"
+	    		emptyMessage="Nenhum Colaborador encontrado." rows="10"
+	    		paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
+	    		
+	    		<p:column headerText="Código" style="text-align: center; width: 40px">
+	    			<h:outputText value="#{colaborador.id}" />
+	    		</p:column>
+	    		<p:column headerText="Nome">
+	    			<h:outputText value="#{colaborador.nome}" />
+	    		</p:column>
+	    		<p:column style="width: 30px; text-align: center">
+	    			<p:commandButton icon="ui-icon-check" title="Selecionar"
+	    				action="#{pesquisaColaboradorDialogBean.selecionar(colaborador)}"
+	    				process="@this" />
+	    		</p:column>
+	    		
+	    	</p:dataTable>
+		</h:form>
+	</h:body>
+	
+</html>
