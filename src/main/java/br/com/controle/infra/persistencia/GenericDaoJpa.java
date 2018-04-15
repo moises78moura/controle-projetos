@@ -50,6 +50,7 @@ public class GenericDaoJpa {
 	 * @param entity
 	 * @return newly created id for the entity.
 	 */
+	@SuppressWarnings("unchecked")
 	public <T extends BaseEntity<PK>, PK extends Serializable> PK save(T entity) {
 		entityManager.persist(entity);
 		return (PK) entity.getId();
@@ -188,6 +189,7 @@ public class GenericDaoJpa {
 	 * @param clazz the entity class.
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public <T extends BaseEntity<?>> List<T> findAllByNamedQuery(Class<T> clazz, String namedQuery) {
 		
 		Query query = entityManager.createNamedQuery(namedQuery);

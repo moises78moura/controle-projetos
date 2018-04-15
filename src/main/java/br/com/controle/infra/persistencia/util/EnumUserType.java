@@ -25,6 +25,7 @@ public class EnumUserType implements UserType, ParameterizedType {
 
 	private static final Log logger = LogFactory.getLog(Type.class);
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void setParameterValues(Properties parameters) {
 		String enumClassName = parameters.getProperty("enumClassName");
@@ -74,6 +75,7 @@ public class EnumUserType implements UserType, ParameterizedType {
 		return false;
 	}
 
+	@SuppressWarnings("rawtypes")
 	public Object nullSafeGet(ResultSet rs, String[] names, Object owner) throws HibernateException, SQLException {
 		// nome da coluna no banco
 		String nomeColuna = names[0];
