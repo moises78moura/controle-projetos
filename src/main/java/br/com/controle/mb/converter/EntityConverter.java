@@ -12,8 +12,8 @@ import java.util.Map;
 
 /**
  * 
- * Conversor gen�rico para entidades
- * 
+ * Conversor genérico para entidades
+ * Não funcionou o converter genérico.
  * 
  */
 
