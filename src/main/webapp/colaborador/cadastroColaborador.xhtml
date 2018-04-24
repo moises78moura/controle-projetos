@@ -54,30 +54,24 @@
 
 				<p:outputLabel value="Estado" for="estado" />
 				<p:selectOneMenu id="estado" value="#{colaboradorBean.estado}"
-					converter="br.com.controle.mb.converter.EntityConverter"
 					required="true" requiredMessage="Campo Estado obrigatorio">
 					<f:selectItem itemLabel="Selecione um Estado" />
 					<f:selectItems value="#{colaboradorBean.estados}" var="estado"
 						itemLabel="#{estado.nome}" itemValue="#{estado}" />
-					<p:ajax listener="#{colaboradorBean.carregarCidades}"
-						update="cidade" />
+					<p:ajax listener="#{colaboradorBean.carregarCidades}" update="cidade" />
 				</p:selectOneMenu>
-
 
 				<p:outputLabel value="Cidade" for="cidade" />
 				<p:selectOneMenu id="cidade" value="#{colaboradorBean.cidade}"
-					converter="br.com.controle.mb.converter.EntityConverter"
-					required="true" requiredMessage="Campo Cidade obrigatorio">
+					required="true"	requiredMessage="Campo Cidade obrigatorio">
 					<f:selectItem itemLabel="Selecione uma Cidade" />
 					<f:selectItems value="#{colaboradorBean.cidades}" var="cidade"
 						itemLabel="#{cidade.nome}" itemValue="#{cidade}" />
-						<p:ajax listener="#{colaboradorBean.carregarBairros}"
-						update="bairro" />
+					<p:ajax	listener="#{colaboradorBean.carregarBairros}" update="bairro" />
 				</p:selectOneMenu>
 
 				<p:outputLabel value="Bairro" for="bairro" />
 				<p:selectOneMenu id="bairro" value="#{colaboradorBean.bairro}"
-					converter="br.com.controle.mb.converter.EntityConverter"
 					required="true" requiredMessage="Campo Bairro obrigatorio">
 					<f:selectItem itemLabel="Selecione um Bairro" />
 					<f:selectItems value="#{colaboradorBean.bairros}" var="bairro"

@@ -1,5 +1,7 @@
 package br.com.controle.mb.converter;
 
+import java.util.Map;
+
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -7,8 +9,6 @@ import javax.faces.convert.FacesConverter;
 import javax.inject.Named;
 
 import br.com.controle.model.BaseEntity;
-
-import java.util.Map;
 
 /**
  * 

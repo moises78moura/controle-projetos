@@ -10,7 +10,6 @@ import java.util.Properties;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.annotations.Type;
 import org.hibernate.engine.spi.SessionImplementor;
@@ -35,7 +34,7 @@ public class EnumUserType implements UserType, ParameterizedType {
 		try {
 			enumClass = ReflectHelper.classForName(enumClassName);
 		} catch (ClassNotFoundException ex) {
-			throw new HibernateException("Classe enum " + enumClassName + " não encontrada", ex);
+			throw new HibernateException("Classe enum " + enumClassName + " nï¿½o encontrada", ex);
 		}
 	}
 
@@ -100,8 +99,8 @@ public class EnumUserType implements UserType, ParameterizedType {
 						return obj;
 					}
 				} catch (Exception e1) {
-					logger.error("O enum " + obj.getClass() + " não extende a interface BaseEnum.", e1);
-					throw new HibernateException("O enum " + obj.getClass() + " não extende a interface BaseEnum.", e1);
+					logger.error("O enum " + obj.getClass() + " nï¿½o extende a interface BaseEnum.", e1);
+					throw new HibernateException("O enum " + obj.getClass() + " nï¿½o extende a interface BaseEnum.", e1);
 				}
 			}
 		}

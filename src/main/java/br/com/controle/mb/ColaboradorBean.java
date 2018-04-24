@@ -6,7 +6,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
+import javax.faces.event.AjaxBehaviorEvent;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -19,7 +20,8 @@ import br.com.controle.model.enuns.EnumSexo;
 import br.com.controle.service.ProjetoService;
 
 @Named
-@RequestScoped
+//@RequestScoped
+@ViewScoped
 public class ColaboradorBean implements Serializable{
 	
 	/**
@@ -55,17 +57,17 @@ public class ColaboradorBean implements Serializable{
 		cidade = new Cidade();
 		bairro = new Bairro();
 		departamentos = projetoService.listarDepartamentos();
-//		cidades = new ArrayList<>();
+		cidades = new ArrayList<>();
 		estados = projetoService.listarEstados();
 		sexos = Arrays.asList(EnumSexo.values());
-//		bairros = new ArrayList<>();
+		bairros = new ArrayList<>();
 	}
 	
-	public void carregarCidades() {
+	public void carregarCidades(AjaxBehaviorEvent ev) {
 		cidades = projetoService.buscarCidadesPorEstado(estado);
 	}
 	
-	public void carregarBairros() {
+	public void carregarBairros(AjaxBehaviorEvent ev) {
 		bairros = projetoService.buscarBairrosPorCidade(cidade);
 	}
 	
@@ -141,6 +143,10 @@ public class ColaboradorBean implements Serializable{
 
 	public void setBairros(List<Bairro> bairros) {
 		this.bairros = bairros;
+	}
+
+	public Cidade buscarCidadePorId(Long id) {
+		return projetoService.buscarCidadePorId(id);
 	}
 	
 	

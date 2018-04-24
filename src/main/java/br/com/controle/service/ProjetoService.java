@@ -56,4 +56,8 @@ public class ProjetoService {
 		return jpa.findByProperty(Bairro.class, "cidade", cidade);
 	}
 
+	public Cidade buscarCidadePorId(Long id) {
+		return jpa.find(Cidade.class, id);
+	}
+
 }
