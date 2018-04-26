@@ -1,5 +1,6 @@
 package br.com.controle.service;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import javax.inject.Inject;
 
 import br.com.controle.infra.persistencia.GenericDaoJpa;
 import br.com.controle.model.Bairro;
+import br.com.controle.model.BaseEntity;
 import br.com.controle.model.Cidade;
 import br.com.controle.model.Departamento;
 import br.com.controle.model.Estado;
@@ -21,8 +23,9 @@ public class ProjetoService {
 	@Inject
 	private GenericDaoJpa jpa;
 
-	public void salvar(Projeto projeto) {
-		jpa.save(projeto);
+//	<T extends BaseEntity<PK>, PK extends Serializable> PK save(T entity)
+	public <T extends BaseEntity<PK>, PK extends Serializable> PK salvar(T entity) {
+		return jpa.save(entity);
 	}
 
 	public List<Departamento> listarDepartamentos() {

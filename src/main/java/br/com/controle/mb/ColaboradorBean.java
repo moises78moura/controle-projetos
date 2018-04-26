@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 import javax.annotation.PostConstruct;
 import javax.faces.event.AjaxBehaviorEvent;
@@ -50,6 +51,8 @@ public class ColaboradorBean implements Serializable{
 	@Inject
 	private ProjetoService projetoService;
 	
+	private Locale locale;
+	
 	@PostConstruct
 	public void init() {
 		colaborador = new Colaborador();
@@ -61,6 +64,7 @@ public class ColaboradorBean implements Serializable{
 		estados = projetoService.listarEstados();
 		sexos = Arrays.asList(EnumSexo.values());
 		bairros = new ArrayList<>();
+		locale = new Locale("pt_BR");
 	}
 	
 	public void carregarCidades(AjaxBehaviorEvent ev) {
@@ -70,6 +74,14 @@ public class ColaboradorBean implements Serializable{
 	public void carregarBairros(AjaxBehaviorEvent ev) {
 		bairros = projetoService.buscarBairrosPorCidade(cidade);
 	}
+	
+	public void salvar(){
+		getCidade().setEstado(getEstado());
+		getBairro().setCidade(getCidade());
+		colaborador.getEndereco().setBairro(getBairro());
+		projetoService.salvar(colaborador);
+	}
+	
 	
 	public Colaborador getColaborador() {
 		return colaborador;
@@ -147,6 +159,14 @@ public class ColaboradorBean implements Serializable{
 
 	public Cidade buscarCidadePorId(Long id) {
 		return projetoService.buscarCidadePorId(id);
+	}
+
+	public Locale getLocale() {
+		return locale;
+	}
+
+	public void setLocale(Locale locale) {
+		this.locale = locale;
 	}
 	
 	

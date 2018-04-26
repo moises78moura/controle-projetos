@@ -34,17 +34,25 @@
 					requiredMessage="Campo Data de Nascimento obrigatorio" />
 
 				<p:outputLabel value="Remuneracao" for="remuneracao" />
-				<p:inputText id="remuneracao"
+				<p:inputNumber id="remuneracao" maxlength="10" value="#{colaboradorBean.colaborador.remuneracao}" required="true"
+				   symbol="R$ " decimalSeparator="," thousandSeparator="." minValue="0.00" maxValue="99.999,99" requiredMessage="Campo Remuneracao obrigatorio" decimalPlaces="10">
+				</p:inputNumber>
+				<ui:remove>
+				<!-- <p:inputMask id="remuneracao" maxlength="10"  mask="R$ 99.999,99"
 					value="#{colaboradorBean.colaborador.remuneracao}" required="true"
-					requiredMessage="Campo Remuneracao obrigatorio" />
+					requiredMessage="Campo Remuneracao obrigatorio">
+					<f:convertNumber currencySymbol="R$" minIntegerDigits="1" maxFractionDigits="3" pattern="#0.000" type="currency" locale="#{colaboradorBean.locale}" />
+				</p:inputMask> -->
+				</ui:remove>
 
 				<p:outputLabel value="E-mail" for="email" />
-				<p:inputText id="email" value="#{colaboradorBean.colaborador.email}" />
-
+				<p:inputText id="email" maxlength="60" value="#{colaboradorBean.colaborador.email}" validatorMessage="E-mail inválido!">
+				<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+				</p:inputText>
+	
 				<p:outputLabel value="Departamento" for="departamento" />
 				<p:selectOneMenu id="departamento"
 					value="#{colaboradorBean.colaborador.departamento}"
-					converter="br.com.controle.mb.converter.EntityConverter"
 					required="true" requiredMessage="Campo Departamento obrigatorio">
 					<f:selectItem itemLabel="Selecione um Departamento" />
 					<f:selectItems value="#{colaboradorBean.departamentos}"
@@ -77,6 +85,10 @@
 					<f:selectItems value="#{colaboradorBean.bairros}" var="bairro"
 						itemLabel="#{bairro.nome}" itemValue="#{bairro}" />
 				</p:selectOneMenu>
+				
+				<p:outputLabel value="Endereço" for="endereco" />
+				<p:inputText id="endereco" value="#{colaboradorBean.colaborador.endereco}"
+					required="true" requiredMessage="Campo Endereço obrigatorio" />
 			</p:panelGrid>
 
 			<p:toolbar style="margin-top: 20px">
